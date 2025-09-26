@@ -15,9 +15,14 @@ datasource db {
 }
 
 model Users {
-  id         String @id @default(uuid())
-  tgUserId   String
-  publicKey  String
+  id         String   @id @default(uuid())
+  tgUserId   String   @unique
+  publicKey  String   @unique
   privateKey String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([tgUserId])
+  @@index([publicKey])
 }
 
